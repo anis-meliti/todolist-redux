@@ -17,32 +17,30 @@ const mapStateToProps = state => {
 class connectedPopup extends Component {
     constructor({ todos }, props) {
         super();
-        this.previousID = todos.length - 1;
+        this.previousID = todos.length;
         this.state = {
             id: this.previousID,
             content: ''
-
         }
-
-
     }
 
     onChangeHandler = event => {
         let content = event.target.value;
         this.setState({
-            id: this.state.id + 1,
+
             content: content
         })
 
         console.log('previousId', this.state.id);
     }
     addNewItem = () => {
-        const ID = this.state.id;
+        const ID = this.state.id + 1;
         const CONTENT = this.state.content;
         console.log("CONTENT", CONTENT);
         console.log("new ID", ID);
         this.props.addTodo({ ID, CONTENT });
         this.setState({ content: '' })
+        this.props.onHide();
 
     }
     render() {
