@@ -34,7 +34,7 @@ class connectedTask extends Component {
         setTimeout(() => {
             this.deleteTask(id)
             this.setState({ doneStyle: 'todo-item' })
-        }, 5000)
+        }, 3000)
 
         console.log(id);
     }
