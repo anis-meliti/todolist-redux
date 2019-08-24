@@ -6,7 +6,7 @@ const mapStateToProps = state => {
     return ({ todos: state.todos });
 };
 
-const connectedTasks = ({ todos, filterCat }) => {
+const connectedTasks = ({ todos }) => {
     return (
         <div>
             {

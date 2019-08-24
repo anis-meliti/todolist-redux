@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 // *****Redux******
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { removeTodo } from '../../js/actions/index';
 // *******Style*********
 import './Task.css';
 // *****Bootstrap*******
-import {Container , InputGroup,FormControl} from 'react-bootstrap'
+import { Container, InputGroup, FormControl } from 'react-bootstrap'
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -18,42 +18,60 @@ const mapStateToProps = state => {
 };
 
 class connectedTask extends Component {
-     doneTask = (id) => {
-        
-        console.log('this.doneBg');
+    constructor() {
+        super();
+        this.state = {
+
+            doneStyle: 'todo-item'
+        }
+
     }
-     deleteTask = (id) => {
+
+
+    doneTask = (id) => {
+        id.persist();
+        this.setState({ doneStyle: 'todo-item-done' })
+        setTimeout(() => {
+            this.deleteTask(id)
+            this.setState({ doneStyle: 'todo-item' })
+        }, 5000)
+
+        console.log(id);
+    }
+    deleteTask = (id) => {
         console.log('id from delete', id);
         this.props.removeTodo(id);
     }
-  render() {
-    return (
-      <Container className="task-container">
-          
-        <InputGroup>
+    render() {
+        return (
+            <Container className="task-container">
 
-            <FormControl 
-            disabled
-            className='todo-item'
-            value={this.props.content}
-            />
-            <InputGroup.Append>
-                <img 
-                    src={require("../../assets/verification-checkmark-symbol-in-black-circular-button.svg")}
-                    alt='done-icon' 
-                        onClick={this.doneTask}
-                    />
-                <img 
-                    src={require("../../assets/delete.svg")}
-                    alt='delete-icon' 
-                        onClick={this.deleteTask}
-                    />
-            </InputGroup.Append>
-        </InputGroup>
-      </Container>
+                <InputGroup>
 
-    )
-  }
+                    <FormControl
+                        id={this.props.id}
+                        disabled
+                        className={this.state.doneStyle}
+                        value={this.props.content}
+                    />
+                    <InputGroup.Append>
+                        <img
+                            id={this.props.id}
+                            src={require("../../assets/verification-checkmark-symbol-in-black-circular-button.svg")}
+                            alt='done-icon'
+                            onClick={this.doneTask}
+                        />
+                        <img
+                            src={require("../../assets/delete.svg")}
+                            alt='delete-icon'
+                            onClick={this.deleteTask}
+                        />
+                    </InputGroup.Append>
+                </InputGroup>
+            </Container>
+
+        )
+    }
 }
-const Task=connect(mapStateToProps,mapDispatchToProps)(connectedTask)
+const Task = connect(mapStateToProps, mapDispatchToProps)(connectedTask)
 export default Task
