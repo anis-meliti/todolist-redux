@@ -4,14 +4,31 @@ const initialState = {
     todos: [{
 
         ID: 0,
-        CONTENT: "Buy Tabac!!!!!"
+        CONTENT: "Buy Tabac!!!!!",
+        CATEGORIE_ID: 1
+    }, {
+
+        ID: 1,
+        CONTENT: "Study more and more!!!!!",
 
     }],
 
     owner: {
         name: 'Anis',
         pic: require('../../assets/IMG_7024.png')
-    }
+    },
+    categories: [{
+        id: 1,
+        title: 'Personnal'
+    }, {
+        id: 2,
+        title: 'Work'
+    },
+    {
+        id: 3,
+        title: 'General'
+    }],
+    filterCat: 0
 }
 function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -23,6 +40,10 @@ function rootReducer(state = initialState, action) {
             let index = _.findIndex(newState.todos, { ID: action.payload });
             newState.todos.splice(index, 1);
             return newState;
+
+
+
+
 
         default: return state;
     }
