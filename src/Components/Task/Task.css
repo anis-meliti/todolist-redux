@@ -1,0 +1,15 @@
+.task-container {
+    border: 1px solid #ababab;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 1px 1px #ababab;
+    max-width: 70%;
+    justify-content: center;
+    margin-top: 1%;
+    padding: 1%;
+}
+
+.todo-item {
+    padding: 2%;
+
+}
